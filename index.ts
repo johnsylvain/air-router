@@ -23,7 +23,25 @@ export default class Microrouter {
       window[eventType](event, () => {
         const arr = match(this.path, this.routes);
         const handler = this.handlers[(arr[0] || {}).old || this.path];
-        handler({ params: exec(this.path, arr) });
+        const parser = document.createElement('a');
+        parser.href = document.location.href;
+
+        const request: { [key: string]: any } = [
+          'protocol',
+          'hostname',
+          'port',
+          'pathname',
+          'search',
+          'hash',
+          'host',
+        ].reduce(
+          (acc: object, cur: string) => ({ ...acc, [cur]: parser[cur]}),
+          {
+            params: exec(this.path, arr)
+          }
+        );
+
+        handler(request);
       });
     });
   }
