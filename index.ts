@@ -43,4 +43,13 @@ export default class Microrouter {
     this.bindEvents('removeEventListener');
     return this;
   }
+
+  go(path: string): void {
+    path = this.type === 'hash' ? (/^#/.test(path) ? path : `#${path}`) : path;
+    window.history.pushState(undefined, undefined, path);
+
+    if (this.type === 'history') {
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  }
 }

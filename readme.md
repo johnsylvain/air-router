@@ -10,11 +10,11 @@ import Microrouter from 'microrouter';
 const router = new Microrouter();
 
 router
-  .on('*', () => {
-    console.log('match all routes');
-  })
   .on('/home', () => {
-    console.log('home');
+    console.log('home route');
+  })
+  .on('/:name', request => {
+    console.log(request.params.name);
   });
 
 router.listen();
@@ -33,6 +33,10 @@ router.listen();
 ### `unlisten()`
 
 > Stop the router by unlistening to changes in the url.
+
+### `go(path)`
+
+> Navigate to the specified `path` via the `pushState` History API. If using a hash router, the `#` is optional.
 
 ## Options
 
