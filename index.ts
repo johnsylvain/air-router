@@ -6,11 +6,22 @@ export default class Routerware {
 
   constructor(public type: string = 'hash') {}
 
-  get path(): string {
-    return {
-      hash: document.location.hash.substring(1) || '/',
-      history: document.location.pathname
-    }[this.type];
+  get path(): { [key: string]: string } {
+    const parser = document.createElement('a');
+    parser.href = document.location.href;
+
+    return [
+      'protocol',
+      'hostname',
+      'port',
+      'pathname',
+      'search',
+      'hash',
+      'host',
+    ].reduce(
+      (acc: object, cur: string) => ({ ...acc, [cur]: parser[cur]}),
+      {}
+    );
   }
 
   private bindEvents(eventType: string): void {
@@ -21,27 +32,15 @@ export default class Routerware {
 
     ['load', eventMap[this.type]].forEach((event: string) => {
       window[eventType](event, () => {
-        const arr = match(this.path, this.routes);
-        const handler = this.handlers[(arr[0] || {}).old || this.path];
-        const parser = document.createElement('a');
-        parser.href = document.location.href;
+        const path = {
+          hash: this.path.hash.substring(1) || '/',
+          history: this.path.pathname
+        }[this.type];
+        const arr = match(path, this.routes);
+        const handler = this.handlers[(arr[0] || {}).old || path];
+        const params = exec(path, arr);
 
-        const request: { [key: string]: any } = [
-          'protocol',
-          'hostname',
-          'port',
-          'pathname',
-          'search',
-          'hash',
-          'host',
-        ].reduce(
-          (acc: object, cur: string) => ({ ...acc, [cur]: parser[cur]}),
-          {
-            params: exec(this.path, arr)
-          }
-        );
-
-        handler(request);
+        handler({ params, ...this.path });
       });
     });
   }
