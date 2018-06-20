@@ -1,6 +1,6 @@
 {
   "name": "microrouter",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "dist/microrouter.js",
   "module": "dist/microrouter.m.js",
   "browser": "dist/microrouter.umd.js",

@@ -1,26 +1,32 @@
 # Microrouter
 
-> Small browser router
+> Route change handler
 
-## Basic Usage
+## 👌 Features
+
+- **Flexible.** Use as a standalone router.
+- **Small.** Built with bundle size in mind.
+- **Familiar.** Use express-like route syntax.
+
+## 💻 Usage
 
 ```js
-import Microrouter from 'microrouter';
+import Microrouter from "microrouter";
 
 const router = new Microrouter();
 
 router
-  .on('/home', () => {
-    console.log('home route');
+  .on("/home", () => {
+    console.log("home route");
   })
-  .on('/:name', request => {
+  .on("/:name", request => {
     console.log(request.params.name);
   });
 
 router.listen();
 ```
 
-## API Methods
+## ⚙️ API Methods
 
 ### `on(pattern, handler)`
 
@@ -38,16 +44,16 @@ router.listen();
 
 > Navigate to the specified `path` via the `pushState` History API. If using a hash router, the `#` is optional.
 
-## Options
+## 🛠 Options
 
 ### Hash Routing (default)
 
 ```js
-const router = new Microrouter('hash');
+const router = new Microrouter("hash");
 ```
 
 ### Browser History Routing
 
 ```js
-const router = new Microrouter('history');
+const router = new Microrouter("history");
 ```
