@@ -1,12 +1,18 @@
 {
   "name": "microrouter",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/microrouter.js",
+  "module": "dist/microrouter.m.js",
+  "browser": "dist/microrouter.umd.js",
+  "source": "index.ts",
   "license": "MIT",
+  "scripts": {
+    "build": "microbundle --entry index.ts --output dist"
+  },
   "dependencies": {
     "matchit": "^1.0.6"
   },
   "devDependencies": {
-    "typescript": "^2.9.2"
+    "microbundle": "^0.4.4"
   }
 }
