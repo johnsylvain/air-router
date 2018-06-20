@@ -1,6 +1,6 @@
 import { match, parse, exec } from 'matchit';
 
-export default class Microrouter {
+export default class Routerware {
   private routes: string[] = [];
   private handlers: object = {};
 

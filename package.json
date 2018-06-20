@@ -1,9 +1,9 @@
 {
-  "name": "microrouter",
+  "name": "routerware",
   "version": "0.0.1",
-  "main": "dist/microrouter.js",
-  "module": "dist/microrouter.m.js",
-  "browser": "dist/microrouter.umd.js",
+  "main": "dist/routerware.js",
+  "module": "dist/routerware.m.js",
+  "browser": "dist/routerware.umd.js",
   "source": "index.ts",
   "license": "MIT",
   "scripts": {

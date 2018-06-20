@@ -1,4 +1,4 @@
-# Microrouter
+# Routerware
 
 > Route change handler
 
@@ -11,9 +11,9 @@
 ## 💻 Usage
 
 ```js
-import Microrouter from "microrouter";
+import Routerware from "routerware";
 
-const router = new Microrouter();
+const router = new Routerware();
 
 router
   .on("/home", () => {
@@ -49,11 +49,11 @@ router.listen();
 ### Hash Routing (default)
 
 ```js
-const router = new Microrouter("hash");
+const router = new Routerware("hash");
 ```
 
 ### Browser History Routing
 
 ```js
-const router = new Microrouter("history");
+const router = new Routerware("history");
 ```
