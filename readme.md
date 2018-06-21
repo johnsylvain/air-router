@@ -11,19 +11,19 @@
 ## 💻 Usage
 
 ```js
-import Air from "air-router";
+import Air from 'air-router';
 
 // Use a hash router (default)
-const router = new Air("hash");
+const router = new Air('hash');
 
 // Use a history router (via History API)
-const router = new Air("history");
+const router = new Air('history');
 
 router
-  .on("/home", () => {
-    console.log("home route");
+  .on('/home', () => {
+    console.log('home route');
   })
-  .on("/:name", request => {
+  .on('/:name', request => {
     console.log(request.params.name);
   });
 
