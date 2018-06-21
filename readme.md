@@ -1,6 +1,6 @@
-# Routerware
+# Air Router
 
-> Route change handler
+> Lightweight route handler
 
 ## 👌 Features
 
@@ -11,9 +11,13 @@
 ## 💻 Usage
 
 ```js
-import Routerware from "routerware";
+import Air from "air-router";
 
-const router = new Routerware();
+// Use a hash router (default)
+const router = new Air("hash");
+
+// Use a history router (via History API)
+const router = new Air("history");
 
 router
   .on("/home", () => {
@@ -26,7 +30,7 @@ router
 router.listen();
 ```
 
-## ⚙️ API Methods
+## Methods
 
 ### `on(pattern, handler)`
 
@@ -44,16 +48,38 @@ router.listen();
 
 > Navigate to the specified `path` via the `pushState` History API. If using a hash router, the `#` is optional.
 
-## 🛠 Options
+## Request object
 
-### Hash Routing (default)
+### `request.cookies`
 
-```js
-const router = new Routerware("hash");
-```
-
-### Browser History Routing
+> Retrieve an object of cookies in key-value pairs.
 
 ```js
-const router = new Routerware("history");
+// Cookie: name=john
+request.cookie;
+// => { name: 'john' }
 ```
+
+### `request.params`
+
+> This property is an object containing properties mapped to the named route "parameters"
+
+```js
+// /user/john
+req.params.name;
+// => 'john'
+```
+
+### URI parsed properties
+
+> Air Router automatically parses the URI into 7 properties
+
+| Request property | Example: `http://example.com:3000/pathname/?search=test#hash"` |
+| ---------------- | -------------------------------------------------------------- |
+| `protocol`       | `http:`                                                        |
+| `hostname`       | `example.com`                                                  |
+| `port`           | `3000`                                                         |
+| `pathname`       | `/pathname/`                                                   |
+| `search`         | `?search=test`                                                 |
+| `hash`           | `#hash`                                                        |
+| `host`           | `example.com:3000`                                             |

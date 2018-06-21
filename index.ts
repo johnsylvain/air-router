@@ -1,6 +1,6 @@
 import { match, parse, exec } from 'matchit';
 
-export default class Routerware {
+export default class Air {
   private routes: string[] = [];
   private handlers: object = {};
 
@@ -8,7 +8,7 @@ export default class Routerware {
 
   get path(): { [key: string]: string } {
     const parser = document.createElement('a');
-    parser.href = document.location.href;
+    parser.href = window.location.href;
 
     return [
       'protocol',
@@ -17,11 +17,18 @@ export default class Routerware {
       'pathname',
       'search',
       'hash',
-      'host',
+      'host'
     ].reduce(
-      (acc: object, cur: string) => ({ ...acc, [cur]: parser[cur]}),
+      (acc: object, cur: string) => ({ ...acc, [cur]: parser[cur] }),
       {}
     );
+  }
+
+  get cookies(): object {
+    return document.cookie.split('; ').reduce((acc: object, cur: string) => {
+      const c: any[] = cur.match(/(^.*?)=(.*$)/);
+      return { ...acc, [c[1]]: c[2] };
+    }, {});
   }
 
   private bindEvents(eventType: string): void {
@@ -40,7 +47,7 @@ export default class Routerware {
         const handler = this.handlers[(arr[0] || {}).old || path];
         const params = exec(path, arr);
 
-        handler({ params, ...this.path });
+        handler({ params, cookies: this.cookies, ...this.path });
       });
     });
   }
