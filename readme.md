@@ -56,7 +56,7 @@ router.listen();
 
 ```js
 // Cookie: name=john
-request.cookie;
+request.cookies;
 // => { name: 'john' }
 ```
 
