@@ -27,7 +27,7 @@ router
     console.log(request.params.name);
   });
 
-router.listen();
+router.start();
 ```
 
 ## Methods
@@ -36,11 +36,11 @@ router.listen();
 
 > Register route with a `pattern` and a `handler`
 
-### `listen()`
+### `start()`
 
 > Start the router by listening to changes in the url.
 
-### `unlisten()`
+### `stop()`
 
 > Stop the router by unlistening to changes in the url.
 
@@ -74,12 +74,12 @@ req.params.name;
 
 > Air Router automatically parses the URI into 7 properties
 
-| Request property | Example: `http://example.com:3000/pathname/?search=test#hash"` |
-| ---------------- | -------------------------------------------------------------- |
-| `protocol`       | `http:`                                                        |
-| `hostname`       | `example.com`                                                  |
-| `port`           | `3000`                                                         |
-| `pathname`       | `/pathname/`                                                   |
-| `search`         | `?search=test`                                                 |
-| `hash`           | `#hash`                                                        |
-| `host`           | `example.com:3000`                                             |
+| Request property | Example: `http://example.com:3000/pathname/?search=test#hash` |
+| ---------------- | ------------------------------------------------------------- |
+| `protocol`       | `http:`                                                       |
+| `hostname`       | `example.com`                                                 |
+| `port`           | `3000`                                                        |
+| `pathname`       | `/pathname/`                                                  |
+| `search`         | `?search=test`                                                |
+| `hash`           | `#hash`                                                       |
+| `host`           | `example.com:3000`                                            |

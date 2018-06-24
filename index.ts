@@ -61,12 +61,12 @@ export default class Air {
     return this;
   }
 
-  listen(): object {
+  start(): object {
     this.bindEvents('addEventListener');
     return this;
   }
 
-  unlisten(): object {
+  stop(): object {
     this.bindEvents('removeEventListener');
     return this;
   }
