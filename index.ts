@@ -25,10 +25,13 @@ export default class Air {
   }
 
   get cookies(): object {
-    return document.cookie.split('; ').reduce((acc: object, cur: string) => {
-      const c: any[] = cur.match(/(^.*?)=(.*$)/);
-      return { ...acc, [c[1]]: c[2] };
-    }, {});
+    return document.cookie
+      .split('; ')
+      .filter(Boolean)
+      .reduce((acc: object, cur: string) => {
+        const c: any[] = cur.match(/(^.*?)=(.*$)/);
+        return { ...acc, [c[1]]: c[2] };
+      }, {});
   }
 
   private bindEvents(eventType: string): void {
@@ -58,12 +61,12 @@ export default class Air {
     return this;
   }
 
-  listen(): object {
+  start(): object {
     this.bindEvents('addEventListener');
     return this;
   }
 
-  unlisten(): object {
+  stop(): object {
     this.bindEvents('removeEventListener');
     return this;
   }
