@@ -1,7 +1,7 @@
 {
   "name": "air-router",
   "description": "Lightweight route handler",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/air-router.js",
   "module": "dist/air-router.m.js",
   "browser": "dist/air-router.umd.js",
@@ -11,7 +11,8 @@
   "license": "MIT",
   "scripts": {
     "build": "microbundle --entry index.ts --output dist",
-    "test": "jest"
+    "test": "jest",
+    "release": "npm test && npm run build && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "dependencies": {
     "matchit": "^1.0.6"
